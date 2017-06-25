@@ -18,6 +18,6 @@ public class Customer {
     private String firstName;
     private String lastName;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = true, name = "username")
+    @JoinColumn(nullable = true, name = "username", insertable = false, updatable = false)
     private User user;
 }

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>ユーザー一覧</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
+          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>顧客管理システム</h1>
+    <p>
+        <span sec:authentication="principal.user.username">duke</span>さんログイン中。
+        <a th:href="@{/logout}" class="btn btn-default btn-xs">ログアウト</a>
+    </p>
+    <div class="col-sm-12">
+        <form th:action="@{/users/create}" th:object="${userForm}" class="form-horizontal" method="post">
+            <fieldset>
+                <legend>ユーザ情報作成</legend>
+                <div class="form-group" th:classappend="${#fields.hasErrors('username')}? 'has-error has-feedback'">
+                    <label for="username" class="col-sm-2 control-label">ユーザー名</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="username" name="username" th:field="*{username}"
+                               class="form-control" value="山田"/>
+                        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error has-feedback'">
+                    <label for="password" class="col-sm-2 control-label">パスワード</label>
+
+                    <div class="col-sm-10">
+                        <input type="password" id="password" name="password" th:field="*{password}"
+                               class="form-control" value="aaaaaa"/>
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('lastname')}? 'has-error has-feedback'">
+                    <label for="lastname" class="col-sm-2 control-label">姓</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="lastname" name="lastname" th:field="*{lastname}"
+                               class="form-control" value="山田"/>
+                        <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('firstname')}? 'has-error has-feedback'">
+                    <label for="firstname" class="col-sm-2 control-label">名</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="firstname" name="firstname" th:field="*{firstname}"
+                               class="form-control" value="太郎"/>
+                        <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('mail')}? 'has-error has-feedback'">
+                    <label for="mail" class="col-sm-2 control-label">メールアドレス</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="mail" name="mail" th:field="*{mail}"
+                               class="form-control" value="太郎"/>
+                        <span th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">作成</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <hr/>
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <th>ID</th>
+                <th>ユーザー名</th>
+                <th>姓</th>
+                <th>名</th>
+                <th>メール</th>
+                <th colspan="2">編集</th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">100</td>
+                <td th:text="${user.username}">user1</td>
+                <td th:text="${user.lastname}">山田</td>
+                <td th:text="${user.firstname}">太郎</td>
+                <td th:text="${user.mail}">太郎</td>
+                <td>
+                    <form th:action="@{/users/edit}" method="get">
+                        <input class="btn btn-default" type="submit" name="form" value="編集"/>
+                        <input type="hidden" name="username" th:value="${user.username}"/>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/users/delete}" method="post">
+                        <input class="btn btn-danger" type="submit" value="削除"/>
+                        <input type="hidden" name="username" th:value="${user.username}"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+        th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
+        th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

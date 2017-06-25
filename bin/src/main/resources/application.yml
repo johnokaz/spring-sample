@@ -8,7 +8,7 @@ spring:
     profiles: dev
     datasource:
       driverClassName: org.h2.Driver
-      url: jdbc:h2:file:/tmp/sampledb;MODE=PostgreSQL
+      url: jdbc:h2:file:/tmp/customers;MODE=PostgreSQL
       username: sa
       password:
     jpa:
