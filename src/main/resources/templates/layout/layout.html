@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>Spring Boot Sample Site</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="/bootflat/css/bootflat.css"
+          th:href="@{/bootflat/css/bootflat.css}"/>
+</head>
+<body>
+	<div layout:fragment="header"> 
+		<div class="container">
+			<div class="col-md-12">
+		        <nav class="navbar navbar-default navbar-custom" role="navigation">
+			        <div class="container-fluid">
+			        	<div class="navbar-header">
+			            	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-4">
+			                      <span class="sr-only">Toggle navigation</span>
+			                      <span class="icon-bar"></span>
+			                      <span class="icon-bar"></span>
+			                      <span class="icon-bar"></span>
+			                </button>
+			            	<a class="navbar-brand" href="#">SCWEB</a>
+			            </div>
+			            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-4">
+			            	<a href="#" type="button" class="btn btn-warning navbar-btn">Sign in</a>
+			        	</div>
+			        </div>
+				</nav>
+			</div>
+		</div>
+	</div>
+
+	<div layout:fragment="contents"></div>
+
+	<footer layout:fragment="footer" class="footer">
+	    <div class="container">
+	      <div class="clearfix">
+	        <div class="footer-logo"><a href="#">SCWEB</a></div>
+	        <dl class="footer-nav">
+	          <dt class="nav-title">PORTFOLIO</dt>
+	          <dd class="nav-item"><a href="#">Web Design</a></dd>
+	          <dd class="nav-item"><a href="#">Branding &amp; Identity</a></dd>
+	          <dd class="nav-item"><a href="#">Mobile Design</a></dd>
+	          <dd class="nav-item"><a href="#">Print</a></dd>
+	          <dd class="nav-item"><a href="#">User Interface</a></dd>
+	        </dl>
+	        <dl class="footer-nav">
+	          <dt class="nav-title">ABOUT</dt>
+	          <dd class="nav-item"><a href="#">The Company</a></dd>
+	          <dd class="nav-item"><a href="#">History</a></dd>
+	          <dd class="nav-item"><a href="#">Vision</a></dd>
+	        </dl>
+	        <dl class="footer-nav">
+	          <dt class="nav-title">GALLERY</dt>
+	          <dd class="nav-item"><a href="#">Facebook</a></dd>
+	          <dd class="nav-item"><a href="#">Twitter</a></dd>
+	          <dd class="nav-item"><a href="#">Instagram</a></dd>
+	        </dl>
+	        <dl class="footer-nav">
+	          <dt class="nav-title">CONTACT</dt>
+	          <dd class="nav-item"><a href="#">Basic Info</a></dd>
+	          <dd class="nav-item"><a href="#">Map</a></dd>
+	          <dd class="nav-item"><a href="#">Conctact Form</a></dd>
+	        </dl>
+	      </div>
+	      <div class="footer-copyright text-center">Copyright © 2017 SCWEB.All rights reserved.</div>
+	    </div>
+	</footer>
+</body>
+</html>
