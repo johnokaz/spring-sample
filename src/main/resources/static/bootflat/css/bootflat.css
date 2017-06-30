@@ -16,6 +16,24 @@
  */
 
 /**
+ * Add User CSS
+ *
+ */
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1 0 auto;
+  padding: 20px;
+}
+  
+/**
  * typography
  * --------------------------------------------------
  */
