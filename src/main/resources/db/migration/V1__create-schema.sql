@@ -8,5 +8,5 @@ CREATE TABLE users (
     mail VARCHAR(30) NOT NULL,
     last_login_on TIMESTAMP,
     created_on TIMESTAMP,
-    updated_on TIMESTAMP,
+    updated_on TIMESTAMP
     );
