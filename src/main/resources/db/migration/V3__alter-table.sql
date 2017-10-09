@@ -1,1 +1,0 @@
-ALTER TABLE customers ADD username VARCHAR(100) NOT NULL DEFAULT 'user1';

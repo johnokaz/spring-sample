@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout2">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>プロジェクト売上情報編集</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
+          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css}"/>
+</head>
+<body>
+<div layout:fragment="content-header" class="content-header">  
+      <h1>
+        顧客管理システム
+        <small>プロジェクト売上情報編集</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+</div>
+
+<div layout:fragment="contents" class="content">  
+    <div class="col-sm-12">
+        <form th:action="@{/projectSales/edit}" th:object="${projectSaleForm}" class="form-horizontal" method="post">
+            <fieldset>
+                <legend>要員情報編集</legend>
+                <div class="form-group" th:classappend="${#fields.hasErrors('projectCd')}? 'has-error has-feedback'">
+                    <label for="projectCd" class="col-sm-2 control-label">プロジェクトコード</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="projectCd" name="projectCd" th:field="*{projectCd}"
+                               class="form-control" value="PRJ00001"/>
+                        <span th:if="${#fields.hasErrors('projectCd')}" th:errors="*{projectCd}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('memberId')}? 'has-error has-feedback'">
+                    <label for="memberId" class="col-sm-2 control-label">要員名</label>
+
+                    <div class="col-sm-10">
+                        <select id="memberId" name="memberId">
+                        	<option value="">---</option>
+       						<option th:each="memberItem : ${memberItems}" th:value="${memberItem.key}" th:text="${memberItem.value}" th:selected="${memberItem.key} == *{memberId}">pulldown</option>
+						</select>
+                        <span th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('saleYear')}? 'has-error has-feedback'">
+                    <label for="saleYear" class="col-sm-2 control-label">売上年</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="saleYear" name="saleYear" th:field="*{saleYear}"
+                               class="form-control" value="2017"/>
+                        <span th:if="${#fields.hasErrors('saleYear')}" th:errors="*{saleYear}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('saleMonth')}? 'has-error has-feedback'">
+                    <label for="saleMonth" class="col-sm-2 control-label">売上月</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="saleMonth" name="saleMonth" th:field="*{saleMonth}"
+                               class="form-control" value="9"/>
+                        <span th:if="${#fields.hasErrors('saleMonth')}" th:errors="*{saleMonth}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('sale')}? 'has-error has-feedback'">
+                    <label for="sale" class="col-sm-2 control-label">売上</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="sale" name="sale" th:field="*{sale}"
+                               class="form-control" value="800000"/>
+                        <span th:if="${#fields.hasErrors('sale')}" th:errors="*{sale}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="submit" class="btn btn-default" name="goToTop" value="戻る"/>
+                        <input type="hidden" name="id" th:value="${param.id[0]}"/>
+                        <input type="submit" class="btn btn-primary" value="更新"/>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+        th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
+        th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

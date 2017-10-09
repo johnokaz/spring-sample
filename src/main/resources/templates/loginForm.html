@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout">
+<head>
+    <meta charset="utf-8"/>
+    <title>ログインフォーム</title>
+</head>
+
+<body>
+	<div layout:fragment="contents" class="content">     
+		<div class="container">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="login-form">
+				    <form class="form-signin" method="post" th:action="@{/login}">
+				        <h4 class="form-signin-heading">ログイン</h4>
+				
+				        <div th:if="${param.error}" class="alert alert-danger">
+				           	 ユーザー名またはパスワードが正しくありません。
+				        </div>
+				        <div class="login-field">
+				        <label for="user_email">ユーザ名</label>
+				        <input type="text" class="form-control" name="username" placeholder="Username" required="required"
+				               autofocus="autofocus"/>
+				        </div>
+				        <div class="login-field">
+				        <label for="user_password">パスワード</label>
+				        <input type="password" class="form-control" name="password" placeholder="Password" required="required"/>
+				        </div>
+				        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+				    </form>
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout2">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>要員一覧</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
+          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css}"/>
+</head>
+<body>
+<div layout:fragment="content-header" class="content-header">  
+      <h1>
+        顧客管理システム
+        <small>要員情報</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+</div>
+
+<div layout:fragment="contents" class="content">  
+    <div class="col-sm-12">
+        <form th:action="@{/members/create}" th:object="${memberForm}" class="form-horizontal" method="post">
+            <fieldset>
+                <div class="form-group" th:classappend="${#fields.hasErrors('lastname')}? 'has-error has-feedback'">
+                    <label for="lastname" class="col-sm-2 control-label">姓</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="lastname" name="lastname" th:field="*{lastname}"
+                               class="form-control" value="佐藤"/>
+                        <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('firstname')}? 'has-error has-feedback'">
+                    <label for="firstname" class="col-sm-2 control-label">名</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="firstname" name="firstname" th:field="*{firstname}"
+                               class="form-control" value="太郎"/>
+                        <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('jobRankId')}? 'has-error has-feedback'">
+                    <label for="jobRankId" class="col-sm-2 control-label">職能ランク</label>
+
+                    <div class="col-sm-10">
+                        <select id="jobRankId" name="jobRankId">
+                        	<option value="">---</option>
+       						<option th:each="jobRankItem : ${jobRankItems}" th:value="${jobRankItem.key}" th:text="${jobRankItem.value}" th:selected="${jobRankItem.key} == *{jobRankId}">pulldown</option>
+						</select>
+                        <span th:if="${#fields.hasErrors('jobRankId')}" th:errors="*{jobRankId}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('memberKbn')}? 'has-error has-feedback'">
+                    <label for="memberKbn" class="col-sm-2 control-label">区分</label>
+
+                    <div class="col-sm-10">
+                        <select id="memberKbn" name="memberKbn">
+                        	<option value="">---</option>
+       						<option th:each="memberKbnItem : ${memberKbnItems}" th:value="${memberKbnItem.key}" th:text="${memberKbnItem.value}" th:selected="${memberKbnItem.key} == *{memberKbn}">pulldown</option>
+						</select>
+                        <span th:if="${#fields.hasErrors('memberKbn')}" th:errors="*{memberKbn}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">作成</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <hr/>
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <th>ID</th>
+                <th>姓</th>
+                <th>名</th>
+                <th>職能ランク</th>
+                <th>原価</th>
+                <th>区分</th>
+                <th colspan="2">編集</th>
+            </tr>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.id}">100</td>
+                <td th:text="${member.lastname}">佐藤</td>
+                <td th:text="${member.firstname}">太郎</td>
+                <td th:text="${member.JobRank.jobRankCd}">M3</td>
+                <td th:text="${member.JobRank.cost}">10000003</td>
+                <td th:switch="${member.memberKbn}">
+                	<p th:case="1" th:text="直営"></p>
+                	<p th:case="2" th:text="協力会社"></p>
+                </td>
+                <td>
+                    <form th:action="@{/members/edit}" method="get">
+                        <input class="btn btn-default" type="submit" name="form" value="編集"/>
+                        <input type="hidden" name="id" th:value="${member.id}"/>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/members/delete}" method="post">
+                        <input class="btn btn-danger" type="submit" value="削除"/>
+                        <input type="hidden" name="id" th:value="${member.id}"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+        th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
+        th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

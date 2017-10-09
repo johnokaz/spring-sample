@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout2">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>職能ランク情報編集</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
+          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css}"/>
+</head>
+<body>
+<div layout:fragment="content-header" class="content-header">  
+      <h1>
+        顧客管理システム
+        <small>職能ランクマスタ編集</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+</div>
+
+<div layout:fragment="contents" class="content">  
+    <div class="col-sm-12">
+        <form th:action="@{/jobRanks/edit}" th:object="${jobRankForm}" class="form-horizontal" method="post">
+            <fieldset>
+                <legend>職能ランク情報編集</legend>
+                <div class="form-group" th:classappend="${#fields.hasErrors('jobRankCd')}? 'has-error has-feedback'">
+                    <label for="jobRankCd" class="col-sm-2 control-label">職能ランクコード</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="jobRankCd" name="jobRankCd" th:field="*{jobRankCd}"
+                               class="form-control" value="M3"/>
+                        <span th:if="${#fields.hasErrors('jobRankCd')}" th:errors="*{jobRankCd}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('jobRankName')}? 'has-error has-feedback'">
+                    <label for="jobRankName" class="col-sm-2 control-label">職能ランク名</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="jobRankName" name="jobRankName" th:field="*{jobRankName}"
+                               class="form-control" value="マネージャー"/>
+                        <span th:if="${#fields.hasErrors('jobRankName')}" th:errors="*{jobRankName}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('jobRankYear')}? 'has-error has-feedback'">
+                    <label for="jobRankYear" class="col-sm-2 control-label">年</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="jobRankYear" name="jobRankYear" th:field="*{jobRankYear}"
+                               class="form-control" value="2017"/>
+                        <span th:if="${#fields.hasErrors('jobRankYear')}" th:errors="*{jobRankYear}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group" th:classappend="${#fields.hasErrors('cost')}? 'has-error has-feedback'">
+                    <label for="cost" class="col-sm-2 control-label">年</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="cost" name="cost" th:field="*{cost}"
+                               class="form-control" value="600000"/>
+                        <span th:if="${#fields.hasErrors('cost')}" th:errors="*{cost}"
+                              class="help-block">error!</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="submit" class="btn btn-default" name="goToTop" value="戻る"/>
+                        <input type="hidden" name="id" th:value="${param.id[0]}"/>
+                        <input type="submit" class="btn btn-primary" value="更新"/>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+        th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
+        th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+</body>
+</html>
