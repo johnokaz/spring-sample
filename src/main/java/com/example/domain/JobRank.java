@@ -23,7 +23,7 @@ public class JobRank {
     private String jobRankName;
     
     // 職能ランク年
-    @Column(name="jobRankYear",columnDefinition="char(4)")
+    @Column(name="jobRankYear",columnDefinition="varchar(4)")
     private String jobRankYear;
     
     // 職能ランク原価
