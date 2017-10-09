@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout2">
 <head lang="en">
     <meta charset="UTF-8"/>
     <title>顧客情報編集</title>
@@ -9,32 +12,29 @@
           th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css}"/>
 </head>
 <body>
-<div class="container">
-    <h1>顧客管理システム</h1>
-    <p>
-        <a th:href="@{/logout}" class="btn btn-default btn-xs">ログアウト</a>
-    </p>
+<div layout:fragment="content-header" class="content-header">  
+      <h1>
+        顧客管理システム
+        <small>顧客情報編集</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+</div>
+
+<div layout:fragment="contents" class="content">  
     <div class="col-sm-12">
         <form th:action="@{/customers/edit}" th:object="${customerForm}" class="form-horizontal" method="post">
             <fieldset>
                 <legend>顧客情報編集</legend>
-                <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error has-feedback'">
-                    <label for="lastName" class="col-sm-2 control-label">姓</label>
+                <div class="form-group" th:classappend="${#fields.hasErrors('customerName')}? 'has-error has-feedback'">
+                    <label for="customerName" class="col-sm-2 control-label">顧客名</label>
 
                     <div class="col-sm-10">
-                        <input type="text" id="lastName" name="lastName" th:field="*{lastName}"
+                        <input type="text" id="customerName" name="customerName" th:field="*{customerName}"
                                class="form-control" value="山田"/>
-                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-                              class="help-block">error!</span>
-                    </div>
-                </div>
-                <div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error has-feedback'">
-                    <label for="firstName" class="col-sm-2 control-label">名</label>
-
-                    <div class="col-sm-10">
-                        <input type="text" id="firstName" name="firstName" th:field="*{firstName}"
-                               class="form-control" value="太郎"/>
-                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                        <span th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}"
                               class="help-block">error!</span>
                     </div>
                 </div>

@@ -43,7 +43,7 @@ public class CustomerController {
         }
         Customer customer = new Customer();
         BeanUtils.copyProperties(form, customer);
-        customerService.create(customer, userDetails.getUser());
+        customerService.create(customer);
         return "redirect:/customers";
     }
 
@@ -63,7 +63,7 @@ public class CustomerController {
         Customer customer = new Customer();
         BeanUtils.copyProperties(form, customer);
         customer.setId(id);
-        customerService.update(customer, userDetails.getUser());
+        customerService.update(customer);
         return "redirect:/customers";
     }
 

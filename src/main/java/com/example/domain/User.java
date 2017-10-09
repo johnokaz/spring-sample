@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-@ToString(exclude = "customers")
 public class User {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +34,4 @@ public class User {
     private Timestamp lastLoginOn;
     private Timestamp createdOn;
     private Timestamp updatedOn;
-    
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Customer> customers;
 }

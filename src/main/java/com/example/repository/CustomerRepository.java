@@ -9,9 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
-    @Query("SELECT x FROM Customer x ORDER BY x.firstName, x.lastName")
+    @Query("SELECT x FROM Customer x ORDER BY x.customerName")
     List<Customer> findAllOrderByName();
 
-    @Query("SELECT x FROM Customer x ORDER BY x.firstName, x.lastName")
+    @Query("SELECT x FROM Customer x ORDER BY x.customerName")
     Page<Customer> findAllOrderByName(Pageable pageable);
 }

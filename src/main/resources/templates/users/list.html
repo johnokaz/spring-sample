@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout2">
 <head lang="en">
     <meta charset="UTF-8"/>
     <title>ユーザー一覧</title>
@@ -10,16 +12,21 @@
           th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css}"/>
 </head>
 <body>
-<div class="container">
-    <h1>顧客管理システム</h1>
-    <p>
-        <span sec:authentication="principal.user.username">duke</span>さんログイン中。
-        <a th:href="@{/logout}" class="btn btn-default btn-xs">ログアウト</a>
-    </p>
+<div layout:fragment="content-header" class="content-header">  
+      <h1>
+        顧客管理システム
+        <small>ユーザ情報作成</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+</div>
+
+<div layout:fragment="contents" class="content">  
     <div class="col-sm-12">
         <form th:action="@{/users/create}" th:object="${userForm}" class="form-horizontal" method="post">
             <fieldset>
-                <legend>ユーザ情報作成</legend>
                 <div class="form-group" th:classappend="${#fields.hasErrors('username')}? 'has-error has-feedback'">
                     <label for="username" class="col-sm-2 control-label">ユーザー名</label>
 

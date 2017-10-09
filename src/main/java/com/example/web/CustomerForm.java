@@ -9,8 +9,5 @@ import javax.validation.constraints.Size;
 public class CustomerForm {
     @NotNull
     @Size(min = 1, max = 127)
-    private String firstName;
-    @NotNull
-    @Size(min = 1, max = 127)
-    private String lastName;
+    private String customerName;
 }

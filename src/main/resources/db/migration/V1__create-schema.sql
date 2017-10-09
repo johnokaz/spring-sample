@@ -1,5 +1,9 @@
-CREATE TABLE customers (id SERIAL PRIMARY KEY, first_name VARCHAR(30), last_name VARCHAR(30));
-CREATE TABLE users (
+-- ---
+-- Table 'USERS'
+-- ユーザマスタ
+-- ---
+DROP TABLE IF EXISTS USERS;
+CREATE TABLE USERS (
     id SERIAL PRIMARY KEY, 
     username VARCHAR(30) NOT NULL, 
     encoded_password VARCHAR(255) NOT NULL, 
@@ -9,4 +13,165 @@ CREATE TABLE users (
     last_login_on TIMESTAMP,
     created_on TIMESTAMP,
     updated_on TIMESTAMP
-    );
+);
+
+-- ---
+-- Table 'SALES'
+-- 売上マスタ
+-- ---
+DROP TABLE IF EXISTS SALES;
+CREATE TABLE SALES (
+    id SERIAL PRIMARY KEY, 
+    sales_year VARCHAR NOT NULL,
+    sales_month VARCHAR NOT NULL,
+    software_sale INT NOT NULL,
+    labor_cost INT NOT NULL,
+    outsourcing_cost INT NOT NULL,
+    division_cost INT NOT NULL,
+    current_software_cost INT NOT NULL,    
+    gross_profit INT NOT NULL,    
+    sga INT NOT NULL,
+    operating_income INT NOT NULL,    
+    non_operating_income INT NOT NULL,
+    non_operating_expense INT NOT NULL,
+    ordinary_income INT NOT NULL,
+    created_on TIMESTAMP,
+    updated_on TIMESTAMP
+);
+
+-- ---
+-- Table 'MEMBERS'
+-- 顧客マスタ
+-- ---
+DROP TABLE IF EXISTS MEMBERS;
+CREATE TABLE MEMBERS (
+  id SERIAL PRIMARY KEY, 
+  lastname VARCHAR NULL DEFAULT NULL,
+  firstname VARCHAR NULL DEFAULT NULL,
+  job_rank_id INTEGER NULL DEFAULT NULL,
+  member_kbn INTEGER NULL DEFAULT NULL,
+  created_on TIMESTAMP NULL DEFAULT NULL,
+  updated_on TIMESTAMP NULL DEFAULT NULL
+);
+
+-- ---
+-- Table 'JOB_RANKS'
+-- 職能マスタ
+-- ---
+DROP TABLE IF EXISTS JOB_RANKS;
+CREATE TABLE JOB_RANKS (
+  id SERIAL PRIMARY KEY, 
+  job_rank_cd VARCHAR NOT NULL DEFAULT 'NULL',
+  job_rank_name VARCHAR NULL DEFAULT NULL,
+  job_rank_year CHAR(4) NULL DEFAULT NULL,
+  cost INTEGER NULL DEFAULT NULL,
+  created_on TIMESTAMP NULL DEFAULT NULL,
+  updated_on TIMESTAMP NULL DEFAULT NULL
+);
+
+-- ---
+-- Table 'PROJECTS'
+-- プロジェクトマスタ
+-- ---
+DROP TABLE IF EXISTS PROJECTS;
+CREATE TABLE PROJECTS (
+  id SERIAL PRIMARY KEY, 
+  project_cd VARCHAR NULL DEFAULT NULL,
+  project_name VARCHAR NULL DEFAULT NULL,
+  customer_id INTEGER NULL DEFAULT NULL,
+  contract_id INTEGER NULL DEFAULT NULL,
+  created_on TIMESTAMP NULL DEFAULT NULL,
+  updated_on TIME NULL DEFAULT NULL,
+);
+
+-- ---
+-- Table 'CUSTOMERS'
+-- 顧客マスタ
+-- ---
+DROP TABLE IF EXISTS CUSTOMERS;
+CREATE TABLE CUSTOMERS (
+  id SERIAL PRIMARY KEY, 
+  customer_name VARCHAR NULL DEFAULT NULL,
+  created_on TIMESTAMP NULL DEFAULT NULL,
+  updated_on TIMESTAMP NULL DEFAULT NULL
+);
+
+-- ---
+-- Table 'CONTRACT'
+-- 契約マスタ
+-- ---
+
+DROP TABLE IF EXISTS CONTRACT;
+CREATE TABLE CONTRACT (
+  id SERIAL PRIMARY KEY, 
+  project_cd VARCHAR NULL DEFAULT NULL,
+  contract_kbn INTEGER NULL DEFAULT NULL,
+  member_id INTEGER NULL DEFAULT NULL,
+  role INTEGER NULL DEFAULT NULL,
+  bulk_price INTEGER NULL DEFAULT NULL,
+  uni_price INTEGER NULL DEFAULT NULL,
+  standard_hour INTEGER NULL DEFAULT NULL,
+  min_hour INTEGER NULL DEFAULT NULL,
+  max_hour INTEGER NULL DEFAULT NULL,
+  created_on TIMESTAMP NULL DEFAULT NULL,
+  updated_on TIMESTAMP NULL DEFAULT NULL
+);
+
+-- ---
+-- Table 'PROJECT_SALES'
+-- プロジェクト売上
+-- ---
+
+DROP TABLE IF EXISTS PROJECT_SALES;
+CREATE TABLE PROJECT_SALES (
+  id SERIAL PRIMARY KEY, 
+  project_cd VARCHAR NULL DEFAULT NULL,
+  member_id INTEGER NULL DEFAULT NULL,
+  sale_year VARCHAR NULL DEFAULT NULL,
+  sale_month VARCHAR NULL DEFAULT NULL,
+  sale INTEGER NULL DEFAULT NULL,
+  created_on TIMESTAMP NULL DEFAULT NULL,
+  updated_on TIMESTAMP NULL DEFAULT NULL
+);
+
+-- ---
+-- Table 'DEPTS'
+-- 部門マスタ
+-- ---
+
+DROP TABLE IF EXISTS DEPTS;
+CREATE TABLE DEPTS (
+  id SERIAL PRIMARY KEY, 
+  dept_name VARCHAR NULL DEFAULT NULL,
+  parent_dept_id VARCHAR NULL DEFAULT NULL,
+  created_on TIMESTAMP NULL DEFAULT NULL,
+  updated_on TIMESTAMP NULL DEFAULT NULL
+);
+
+-- ---
+-- Table 'ROLES'
+-- ロールマスタ
+-- ---
+DROP TABLE IF EXISTS ROLES;		
+CREATE TABLE ROLES (
+  id SERIAL PRIMARY KEY, 
+  role_name VARCHAR NULL DEFAULT NULL,
+  created_on TIMESTAMP NULL DEFAULT NULL,
+  updated_on TIMESTAMP NULL DEFAULT NULL
+);
+
+-- ---
+-- Table 'MAN_HOURS'
+-- 工数
+-- ---
+
+DROP TABLE IF EXISTS MAN_HOURS;
+CREATE TABLE MAN_HOURS (
+  id SERIAL PRIMARY KEY, 
+  project_cd VARCHAR NULL DEFAULT NULL,
+  member_id INTEGER NULL DEFAULT NULL,
+  man_hour_date DATE NULL DEFAULT NULL,
+  man_hour DOUBLE NULL DEFAULT NULL,
+  created_on TIMESTAMP NULL DEFAULT NULL,
+  updated_on TIMESTAMP NULL DEFAULT NULL
+);
